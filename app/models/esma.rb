@@ -1,0 +1,2 @@
+class Esma < ApplicationRecord
+end
