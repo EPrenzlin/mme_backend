@@ -13,6 +13,16 @@ class ExemptionsController < ApplicationController
         render json:exemption
     end 
     end 
+
+    def show 
+    exemption = Exemption.find_by(id:params[:id])
+    render json:exemption
+    end
+
+    def destroy 
+    exemption = Exemption.find_by(id: params[:id])
+    exemption.destroy 
+    end
     
     end
     
