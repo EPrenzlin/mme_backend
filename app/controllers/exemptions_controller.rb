@@ -29,7 +29,7 @@ class ExemptionsController < ApplicationController
     
     private 
     def validator(new_exemption)
-        if !Esma.all.include?(new_exemption) 
+        if !Esma.all.find_by(isin:new_exemption.isin) 
         return true 
         else
         false 
