@@ -8,11 +8,14 @@ class ExemptionsController < ApplicationController
     
     def create 
     exemption = Exemption.new(name:params[:name], isin:params[:isin], stock_market:params[:stock_market])
-    if exemption.valid?
+    if exemption.valid? && validator(exemption) 
         exemption.save
         render json:exemption
+    else 
+        errors = exemption.errors.messages 
+        render json:errors
     end 
-    end 
+    end
 
     def show 
     exemption = Exemption.find_by(id:params[:id])
@@ -24,5 +27,14 @@ class ExemptionsController < ApplicationController
     exemption.destroy 
     end
     
+    private 
+    def validator(new_exemption)
+        if !Esma.all.include?(new_exemption) 
+        return true 
+        else
+        false 
+        end
+    end
+
     end
     
